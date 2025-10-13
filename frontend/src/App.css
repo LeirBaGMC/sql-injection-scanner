@@ -1,0 +1,95 @@
+/* frontend/src/App.css */
+:root {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #007bff;
+  --container-bg: #1e1e1e;
+  --border-color: #333;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+header h1 {
+  color: var(--primary-color);
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+form input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: #2a2a2a;
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+form button {
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+form button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.status-container, .results-container {
+  background-color: var(--container-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-top: 20px;
+}
+
+.vulnerability-card {
+  border-left: 4px solid #dc3545;
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.vulnerability-card code {
+  background-color: #333;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.error-message {
+    color: #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff4d4d;
+}

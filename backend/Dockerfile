@@ -1,19 +1,19 @@
 # backend/Dockerfile
 
-# Usamos una imagen oficial de Go como base. 'alpine' es una versión muy ligera.
+# --- ETAPA 1: Builder ---
+# Usa una imagen de Go para compilar el binario
 FROM golang:1.25-alpine AS builder
-
-# Establecemos el directorio de trabajo dentro del contenedor.
 WORKDIR /app
 
-# Copiamos los archivos de nuestro proyecto (que crearemos en la Fase 2) al contenedor.
+# Copia los archivos de dependencias de Go
+COPY go.mod go.sum ./
+RUN go mod download
 COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
-# Este comando descargará las dependencias de Go.
-RUN go mod tidy
-
-# Compilamos nuestro código Go en un archivo ejecutable llamado 'main'.
-RUN go build -o main .
-
-# Este es el comando que se ejecutará cuando el contenedor arranque.
+# --- ETAPA 2: Final ---
+# Usa una imagen mínima para ejecutar el binario
+FROM scratch
+WORKDIR /root/
+COPY --from=builder /app/main .
 CMD ["./main"]

@@ -26,6 +26,8 @@ services: #Se define los 3 módulos de la aplicación
 
   db:
     image: mysql:8.0
+    ports:
+    - "33060:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: scanner_db
