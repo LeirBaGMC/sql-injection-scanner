@@ -1,7 +1,7 @@
 # backend/Dockerfile
 
 # Usamos una imagen oficial de Go como base. 'alpine' es una versión muy ligera.
-FROM golang:1.21-alpine
+FROM golang:1.25-alpine AS builder
 
 # Establecemos el directorio de trabajo dentro del contenedor.
 WORKDIR /app
