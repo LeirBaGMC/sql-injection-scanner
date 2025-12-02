@@ -1,4 +1,3 @@
-// backend/api/handlers.go
 package api
 
 import (
@@ -7,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/LeirBaGMC/sql-scanner/database" // Importamos los paquetes locales
+	"github.com/LeirBaGMC/sql-scanner/database"
 	"github.com/LeirBaGMC/sql-scanner/scanner"
 	"github.com/gin-gonic/gin"
 )

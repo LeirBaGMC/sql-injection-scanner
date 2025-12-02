@@ -4,7 +4,7 @@ package main
 import (
 	"log"
 
-	"github.com/LeirBaGMC/sql-scanner/api" // Importamos los nuevos paquetes
+	"github.com/LeirBaGMC/sql-scanner/api" 
 	"github.com/LeirBaGMC/sql-scanner/database"
 	"github.com/gin-gonic/gin"
 )

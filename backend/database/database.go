@@ -1,5 +1,5 @@
-// backend/database/database.go
 package database
+
 
 import (
 	"database/sql"
@@ -8,13 +8,13 @@ import (
 	"os"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql" // Driver
+	_ "github.com/go-sql-driver/mysql" 
 )
 
 // DB es la conexión a la base de datos que será accesible por otros paquetes
 var DB *sql.DB
 
-// Connect se encarga de inicializar la conexión
+
 func Connect() {
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
@@ -41,7 +41,7 @@ func Connect() {
 	log.Fatalf("No se pudo conectar a la base de datos después de varios intentos: %v", err)
 }
 
-// CreateTables crea las tablas si no existen
+
 func CreateTables() {
 	scansTable := `
     CREATE TABLE IF NOT EXISTS scans (

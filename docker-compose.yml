@@ -1,51 +1,55 @@
-version: '3.8' #Versión de sintaxis de Docker Compose
-services: #Se define los 3 módulos de la aplicación
-  backend: # Contenedor de la API
-    build: ./backend # Indicacion para buscar la carpeta ./backend y seguir las instrucciones del mismo
+services:
+  backend:
+    build: ./backend
     ports:
-      - "8080:8080" #Conexion entre puertos del pc y la página
-    environment: #Creedenciales para la BD
+      - "8080:8080"
+    environment:
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: scanner_db
       DB_HOST: db
     networks:
-      - go-network
-    depends_on: #Es una condicion para que no inicie el contenedor sin que la BD este lista
+      - scanner-net 
+    depends_on:
       db:
         condition: service_healthy
 
   frontend:
-    build: ./frontend #Busca la carpeta frontend
+    build: ./frontend
     ports:
-      - "3000:80" #Conecta al puerto 3000 de la pc al 80 del contenedor
+      - "3000:80"
     networks:
-      - go-network
-    depends_on: #No inicies si el backend no esta listo
+      - scanner-net 
+    depends_on:
       - backend
 
   db:
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-    - "33060:3306"
+      - "33060:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: scanner_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    volumes:
-      - db_data:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: root_password
     networks:
-      - go-network
-    # Corrected indentation for the healthcheck block
+      - scanner-net 
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  dvwa:
+    image: vulnerables/web-dvwa
+    ports:
+      - "8000:80"
+    networks:
+      - scanner-net 
+
 networks:
-  go-network:
+  scanner-net: 
     driver: bridge
 
 volumes:
